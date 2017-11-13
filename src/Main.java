@@ -1,10 +1,8 @@
 import Entity.Mot;
+import Entity.Graph;
 import Graph.GenerateGraph;
 import Utilitaire.Import;
-
 import java.io.File;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -29,10 +27,13 @@ public class Main {
         List<Mot> mots = null;
         try {
             mots = Import.importer(file);
-            List<Mot> graph = GenerateGraph.createGraph(mots);
+            List<Mot> listMots = GenerateGraph.createGraph(mots);
+            Graph graph = new Graph(listMots);
+            System.out.println(graph.getNbmotsSansVoisins());
             System.out.println("Fin traitement");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
