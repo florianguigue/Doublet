@@ -1,14 +1,13 @@
 package Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Mot {
+public class Mot implements Serializable{
 
     private String texte;
-    private List<Mot> voisins;
 
     public Mot(String texte) {
-        this.voisins = null;
         this.texte = texte;
     }
 
@@ -18,13 +17,5 @@ public class Mot {
 
     public void setTexte(String texte) {
         this.texte = texte;
-    }
-
-    public List<Mot> getVoisins() {
-        return voisins;
-    }
-
-    public void setVoisins(List<Mot> voisins) {
-        this.voisins = voisins;
     }
 }

@@ -23,16 +23,17 @@ public class Main {
     private final static String FILE_18 = "fichierTexte/mots18lettres.txt";
 
     public static void main(String[] args)  {
-        File file = new File(FILE_4);
+        File file = new File(FILE_12);
         List<Mot> mots = null;
         try {
             mots = Import.importer(file);
-            List<Mot> listMots = GenerateGraph.createGraph(mots);
-            Graph graph = new Graph(listMots);
+            Graph graph = GenerateGraph.createGraph(mots);
+
             graph.calcul();
             System.out.println(graph.getNbSommets());
             System.out.println(graph.getNbAretes());
             System.out.println(graph.getNbmotsSansVoisins());
+            System.out.println(graph.sommetWithKSommets(9));
             System.out.println("Fin traitement");
         } catch (Exception e) {
             e.printStackTrace();

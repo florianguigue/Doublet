@@ -1,10 +1,13 @@
 package Entity;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Graph {
 
-    private List<Mot> graph;
+    private List<Mot> listMot;
+    private Map<Mot, List<Mot>> graph;
     private int nbSommets;
     private int nbAretes;
 
@@ -13,15 +16,24 @@ public class Graph {
         setNbAretes();
     }
 
-    public Graph(List<Mot> graph) {
+    public Graph (Map<Mot, List<Mot>> graph, List<Mot> motList) {
         this.graph = graph;
+        this.listMot = motList;
     }
 
-    public List<Mot> getGraph() {
+    public List<Mot> getListMot() {
+        return listMot;
+    }
+
+    public void setListMot(List<Mot> listMot) {
+        this.listMot = listMot;
+    }
+
+    public Map<Mot, List<Mot>> getGraph() {
         return graph;
     }
 
-    public void setGraph(List<Mot> graph) {
+    public void setGraph(Map<Mot, List<Mot>> graph) {
         this.graph = graph;
     }
 
@@ -42,13 +54,11 @@ public class Graph {
     public void setNbAretes() {
         int arete = 0;
         if (graph != null) {
-            for (Mot mot : graph) {
-                if(mot.getVoisins() != null) {
-                    arete += mot.getVoisins().size();
-                }
+            for (int i = 0; i < graph.size(); i++) {
+                arete += this.graph.get(listMot.get(i)).size();
             }
-            this.nbAretes = arete / 2;
         }
+        this.nbAretes = arete/2;
     }
 
     /**
@@ -58,8 +68,8 @@ public class Graph {
      */
     public int getNbmotsSansVoisins() {
         int compteurSansVoisins = 0;
-        for (Mot mot : this.graph) {
-            if (mot.getVoisins() == null) {
+        for (int i = 0; i < graph.size(); i++) {
+            if (graph.get(listMot.get(i)).size() == 0){
                 compteurSansVoisins += 1;
             }
         }
@@ -80,4 +90,17 @@ public class Graph {
         }
         return compteurComposantesConnexes;
     }
+
+    public int sommetWithKSommets(int k) {
+        int compteur = 0;
+        for (int i = 0; i < graph.size(); i++) {
+            if (graph.get(listMot.get(i)).size() == k){
+                compteur += 1;
+            }
+        }
+        return compteur;
+    }
+
+
+
 }
