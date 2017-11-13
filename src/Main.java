@@ -3,8 +3,6 @@ import Graph.GenerateGraph;
 import Utilitaire.Import;
 
 import java.io.File;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
