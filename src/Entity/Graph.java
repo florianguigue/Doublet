@@ -52,16 +52,32 @@ public class Graph {
     }
 
     /**
-     *  Question 4
+     * Question 4
+     *
      * @return
      */
-    public int getNbmotsSansVoisins(){
+    public int getNbmotsSansVoisins() {
         int compteurSansVoisins = 0;
-        for (Mot mot : this.graph){
-            if (mot.getVoisins() == null){
+        for (Mot mot : this.graph) {
+            if (mot.getVoisins() == null) {
                 compteurSansVoisins += 1;
             }
         }
         return compteurSansVoisins;
+    }
+
+    /**
+     * Question 4
+     *
+     * @return
+     */
+    public int nbComposantesConnexes() {
+        int compteurComposantesConnexes = 0;
+        for (Mot mot : this.graph) {
+            if (mot.getVoisins() == null) {
+                compteurComposantesConnexes += 1;
+            }
+        }
+        return compteurComposantesConnexes;
     }
 }
