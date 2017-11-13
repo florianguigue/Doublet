@@ -2,6 +2,7 @@ package Graph;
 
 import Entity.Mot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateGraph {
@@ -12,10 +13,13 @@ public class GenerateGraph {
 
     public static List<Mot> createGraph(List<Mot> motList) {
         List<Mot> graph = motList;
-        for (int i = 0; i < motList.size(); i++) {
-            for (int j = 0; j < motList.size(); j++) {
-                if (OneLetterDifference(motList.get(i), motList.get(j))) {
-                    graph.get(i).getVoisins().add(motList.get(j));
+        for (Mot mot1: motList) {
+            for (Mot mot2: motList) {
+                if (OneLetterDifference(mot1, mot2)) {
+                    if(mot1.getVoisins() == null) {
+                        mot1.setVoisins(new ArrayList<Mot>());
+                    }
+                    mot1.getVoisins().add(mot2);
                 }
             }
         }
@@ -31,7 +35,7 @@ public class GenerateGraph {
             }
         }
 
-        if(letter == 1) {
+        if(letter == mot1.getTexte().length() - 1) {
             return true;
         } else {
             return false;

@@ -1,4 +1,5 @@
 import Entity.Mot;
+import Graph.GenerateGraph;
 import Utilitaire.Import;
 
 import java.io.File;
@@ -28,6 +29,8 @@ public class Main {
         List<Mot> mots = null;
         try {
             mots = Import.importer(file);
+            List<Mot> graph = GenerateGraph.createGraph(mots);
+            System.out.println("Fin traitement");
         } catch (Exception e) {
             e.printStackTrace();
         }
