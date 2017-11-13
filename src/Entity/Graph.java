@@ -1,8 +1,6 @@
 package Entity;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
 
@@ -16,7 +14,7 @@ public class Graph {
         setNbAretes();
     }
 
-    public Graph (Map<Mot, List<Mot>> graph, List<Mot> motList) {
+    public Graph(Map<Mot, List<Mot>> graph, List<Mot> motList) {
         this.graph = graph;
         this.listMot = motList;
     }
@@ -58,7 +56,7 @@ public class Graph {
                 arete += this.graph.get(listMot.get(i)).size();
             }
         }
-        this.nbAretes = arete/2;
+        this.nbAretes = arete / 2;
     }
 
     /**
@@ -69,7 +67,7 @@ public class Graph {
     public int getNbmotsSansVoisins() {
         int compteurSansVoisins = 0;
         for (int i = 0; i < graph.size(); i++) {
-            if (graph.get(listMot.get(i)).size() == 0){
+            if (graph.get(listMot.get(i)).size() == 0) {
                 compteurSansVoisins += 1;
             }
         }
@@ -77,30 +75,50 @@ public class Graph {
     }
 
     /**
-     * Question 4
+     * Question 3
      *
      * @return
      */
     public int nbComposantesConnexes() {
         int compteurComposantesConnexes = 0;
-        for (Mot mot : this.graph) {
-            if (mot.getVoisins() == null) {
-                compteurComposantesConnexes += 1;
+        Stack<Mot> pile = new Stack<>();
+        Mot current = null;
+        for (Mot mot : listMot) {
+            mot.setMarque(false);
+        }
+        for (Mot m : listMot) {
+            if (!m.isMarque()) {
+                pile.push(m);
+                pile.peek().setMarque(true);
+                while (pile.size() > 0) {
+                    current = pile.pop();
+                    for (Mot voisin : graph.get(current)) {
+                        if (!voisin.isMarque()) {
+                            voisin.setMarque(true);
+                            pile.push(voisin);
+                        }
+                    }
+                }
+                compteurComposantesConnexes++;
             }
         }
         return compteurComposantesConnexes;
     }
 
+    /**
+     *  Question 6
+     * @param k
+     * @return
+     */
     public int sommetWithKSommets(int k) {
         int compteur = 0;
         for (int i = 0; i < graph.size(); i++) {
-            if (graph.get(listMot.get(i)).size() == k){
+            if (graph.get(listMot.get(i)).size() == k) {
                 compteur += 1;
             }
         }
         return compteur;
     }
-
 
 
 }
