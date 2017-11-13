@@ -8,6 +8,11 @@ public class Graph {
     private int nbSommets;
     private int nbAretes;
 
+    public void calcul() {
+        setNbSommets();
+        setNbAretes();
+    }
+
     public Graph(List<Mot> graph) {
         this.graph = graph;
     }
@@ -21,19 +26,29 @@ public class Graph {
     }
 
     public int getNbSommets() {
-        return graph.size();
+        return this.nbSommets;
     }
 
-    public void setNbSommets(int nbSommets) {
-        this.nbSommets = nbSommets;
+    public void setNbSommets() {
+        if (this.graph != null) {
+            this.nbSommets = graph.size();
+        }
     }
 
     public int getNbAretes() {
         return nbAretes;
     }
 
-    public void setNbAretes(int nbAretes) {
-        this.nbAretes = nbAretes;
+    public void setNbAretes() {
+        int arete = 0;
+        if (graph != null) {
+            for (Mot mot : graph) {
+                if(mot.getVoisins() != null) {
+                    arete += mot.getVoisins().size();
+                }
+            }
+            this.nbAretes = arete / 2;
+        }
     }
 
     /**
@@ -50,8 +65,3 @@ public class Graph {
         return compteurSansVoisins;
     }
 }
-    public int getNbSommets() {
-        if (graph != null)
-    }
-            return graph.size();
-        else return 0;
