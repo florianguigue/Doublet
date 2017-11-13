@@ -4,6 +4,8 @@ import Graph.GenerateGraph;
 import Utilitaire.Import;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     private final static String FILE_4 = "fichierTexte/mots04lettres.txt";
@@ -33,7 +35,14 @@ public class Main {
             /*System.out.println(graph.getNbSommets());
             System.out.println(graph.getNbAretes());
             System.out.println(graph.getNbmotsSansVoisins());
-            System.out.println(graph.sommetWithKSommets(9));*/
+            Map<Integer, AtomicInteger> sommetVoisins = graph.sommetWithKvoisins();
+            for (int i = 0; i < sommetVoisins.size(); i++) {
+                if(sommetVoisins.get(i) != null) {
+                    System.out.println("Pour " + (i+1) + " voisins : " + sommetVoisins.get(i).toString());
+                } else {
+                    System.out.println("Pour " + (i+1) + " voisins : 0");
+                }
+            }
             System.out.println(graph.nbComposantesConnexes());
             System.out.println("Fin traitement");
         } catch (Exception e) {

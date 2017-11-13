@@ -104,20 +104,19 @@ public class Graph {
         }
         return compteurComposantesConnexes;
     }
+    public Map<Integer, AtomicInteger> sommetWithKvoisins() {
+        Map<Integer, AtomicInteger> liste = new HashMap<>();
 
-    /**
-     *  Question 6
-     * @param k
-     * @return
-     */
-    public int sommetWithKSommets(int k) {
-        int compteur = 0;
         for (int i = 0; i < graph.size(); i++) {
-            if (graph.get(listMot.get(i)).size() == k) {
-                compteur += 1;
+            if (graph.get(listMot.get(i)).size() != 0) {
+                if (liste.get(graph.get(listMot.get(i)).size()) == null) {
+                    liste.put(graph.get(listMot.get(i)).size(), new AtomicInteger(1));
+                } else {
+                    liste.get(graph.get(listMot.get(i)).size()).incrementAndGet();
+                }
             }
         }
-        return compteur;
+        return liste;
     }
 
 
