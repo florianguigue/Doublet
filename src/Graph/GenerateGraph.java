@@ -4,7 +4,9 @@ import Entity.Mot;
 import Entity.Graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GenerateGraph {
 
@@ -12,19 +14,18 @@ public class GenerateGraph {
 
     }
 
-    public static List<Mot> createGraph(List<Mot> motList) {
-        List<Mot> graph = motList;
+    public static Graph createGraph(List<Mot> motList) {
+        Map<Mot, List<Mot>> listMot = new HashMap<>();
         for (Mot mot1: motList) {
+            List<Mot> listAdjacence = new ArrayList<>();
             for (Mot mot2: motList) {
                 if (OneLetterDifference(mot1, mot2)) {
-                    if(mot1.getVoisins() == null) {
-                        mot1.setVoisins(new ArrayList<Mot>());
-                    }
-                    mot1.getVoisins().add(mot2);
+                    listAdjacence.add(mot2);
                 }
             }
+            listMot.put(mot1, listAdjacence);
         }
-
+        Graph graph = new Graph(listMot, motList);
         return graph;
     }
 
