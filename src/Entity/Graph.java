@@ -50,3 +50,8 @@ public class Graph {
         return compteurSansVoisins;
     }
 }
+    public int getNbSommets() {
+        if (graph != null)
+    }
+            return graph.size();
+        else return 0;
